@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>英語音声変化マスター教材</title>
+    <title>リアル英語リンキング教材</title>
     <style>
         * {
             margin: 0;
@@ -16,99 +16,73 @@
             background: white;
             min-height: 100vh;
             color: #333;
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
 
         .header {
             text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
             border-radius: 20px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .header h1 {
-            color: #4a5568;
-            font-size: 2.2em;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .header p {
-            color: #666;
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-
-        .sound-change-types {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .type-card {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-
-        .type-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .type-number {
-            font-size: 2em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .type-name {
             font-size: 1.3em;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .type-english {
-            font-size: 1em;
             opacity: 0.9;
-            margin-bottom: 10px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .type-description {
-            font-size: 0.9em;
-            opacity: 0.8;
+        .warning-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #c92a2a;
+            position: relative;
+        }
+
+        .warning-box::before {
+            content: "⚡";
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
         }
 
         .section {
-            background: rgba(255, 255, 255, 0.95);
+            background: #fff;
             margin-bottom: 25px;
             border-radius: 15px;
+            border: 2px solid #e2e8f0;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
         }
 
         .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            border-color: #667eea;
         }
 
         .section-header {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 20px 25px;
             font-size: 1.4em;
@@ -118,11 +92,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .section-header:hover {
+            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
         }
 
         .section-content {
-            padding: 25px;
+            padding: 30px;
             display: none;
+            background: #f9fafb;
         }
 
         .section.active .section-content {
@@ -138,47 +118,217 @@
             transform: rotate(180deg);
         }
 
-        .rule-box {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        .reality-vs-theory {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .theory-box {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
             padding: 20px;
             border-radius: 12px;
-            margin: 15px 0;
-            border-left: 5px solid #ff6b6b;
+            border-left: 5px solid #f44336;
+            position: relative;
+        }
+
+        .theory-box::before {
+            content: "📚";
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.3em;
+        }
+
+        .reality-box {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid #4caf50;
+            position: relative;
+        }
+
+        .reality-box::before {
+            content: "🎯";
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.3em;
+        }
+
+        .example-container {
+            margin: 25px 0;
         }
 
         .example-item {
-            background: #f8f9ff;
+            background: #fff;
             border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 15px 0;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .example-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         .example-item:hover {
             border-color: #667eea;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+            transform: translateY(-2px);
         }
 
-        .example-text {
-            font-size: 1.3em;
-            margin-bottom: 10px;
+        .phrase-original {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 20px;
             color: #2d3748;
+            text-align: center;
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: 8px;
         }
 
-        .phonetic {
-            color: #667eea;
-            font-family: 'Courier New', monospace;
-            font-size: 1.1em;
-            margin: 8px 0;
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
         }
 
-        .linking-highlight {
-            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
-            padding: 2px 6px;
-            border-radius: 5px;
+        .textbook-pronunciation {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ff9800;
+        }
+
+        .real-pronunciation {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .phonetic-text {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #1565c0;
+            font-family: 'Arial', sans-serif;
+            margin: 10px 0;
+        }
+
+        .katakana-text {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #d32f2f;
+            margin: 10px 0;
+        }
+
+        .explanation {
+            background: #f0f4f8;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #4299e1;
+        }
+
+        .sound-change-highlight {
+            background: linear-gradient(120deg, #ffeaa7 0%, #fab1a0 100%);
+            padding: 3px 8px;
+            border-radius: 6px;
             font-weight: bold;
             color: #2d3748;
+            position: relative;
+        }
+
+        .flapping-highlight {
+            background: linear-gradient(120deg, #ff7675 0%, #fd79a8 100%);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .step-by-step {
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 2px dashed #667eea;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+            font-size: 1.2em;
+        }
+
+        .listening-exercise {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 5px solid #8e24aa;
+        }
+
+        .exercise-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .exercise-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: #8e24aa;
+        }
+
+        .tips-box {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 5px solid #ffa000;
+            position: relative;
+        }
+
+        .tips-box::before {
+            content: "💡";
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5em;
         }
 
         .practice-button {
@@ -199,78 +349,13 @@
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
 
-        .quiz-container {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 25px;
-            border-radius: 15px;
-            color: white;
-            margin: 20px 0;
-        }
-
-        .quiz-question {
-            font-size: 1.2em;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .quiz-options {
-            display: grid;
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        .quiz-option {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: white;
-        }
-
-        .quiz-option:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.6);
-        }
-
-        .quiz-option.correct {
-            background: rgba(76, 175, 80, 0.8);
-            border-color: #4caf50;
-        }
-
-        .quiz-option.incorrect {
-            background: rgba(244, 67, 54, 0.8);
-            border-color: #f44336;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 20px 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .tips-box {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        .regional-note {
+            background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
             padding: 20px;
-            border-radius: 12px;
+            border-radius: 10px;
             margin: 20px 0;
-            border-left: 5px solid #667eea;
-        }
-
-        .tips-box h4 {
-            color: #2d3748;
-            margin-bottom: 10px;
+            border-left: 4px solid #0277bd;
+            font-style: italic;
         }
 
         @media (max-width: 768px) {
@@ -279,16 +364,15 @@
             }
             
             .header h1 {
-                font-size: 2em;
+                font-size: 2.2em;
             }
             
-            .section-header {
-                padding: 15px 20px;
-                font-size: 1.2em;
+            .reality-vs-theory, .comparison-grid {
+                grid-template-columns: 1fr;
             }
             
-            .section-content {
-                padding: 20px;
+            .phrase-original {
+                font-size: 1.5em;
             }
         }
     </style>
@@ -296,625 +380,485 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎵 英語音声変化マスター教材</h1>
-            <p>ネイティブのように自然に話すための7つの音声変化パターンを習得しよう！<br>
-            リスニング力とスピーキング力を劇的にアップさせる秘訣がここに！</p>
+            <h1>🎯 リアルアメリカ英語リンキング教材</h1>
+            <p>教科書では教えてくれない、本当のアメリカ英語の音の繋がりを学ぼう！<br>
+            実際の街角で聞こえる「生きた英語」の音声変化を体験できます。</p>
         </div>
 
-        <div class="section active" id="overview">
-            <div class="section-header" onclick="toggleSection('overview')">
-                🌟 音声変化とは？なぜ重要なの？
+        <div class="warning-box">
+            <h3>🚨 従来の教材との大きな違い</h3>
+            <p>この教材では、理論的に「正しい」発音ではなく、実際のアメリカ人が日常会話で使っている「リアルな」発音を学習します。教科書で習った発音と大きく違うことがありますが、これこそが現実の英語なのです。映画やドラマ、YouTubeで聞く英語に近づけることを最優先にしています。</p>
+        </div>
+
+        <div class="section active" id="reality-check">
+            <div class="section-header" onclick="toggleSection('reality-check')">
+                💥 現実ショック！教科書 vs リアル発音
                 <span class="arrow">▼</span>
             </div>
             <div class="section-content">
-                <div class="rule-box">
-                    <h3>🤔 こんな経験ありませんか？</h3>
-                    <ul style="list-style: none; padding-left: 0;">
-                        <li style="margin: 10px 0;">📖 教科書の英語は読めるのに、映画の英語が聞き取れない</li>
-                        <li style="margin: 10px 0;">🗣️ 単語一つ一つは正しく発音できるのに、ネイティブっぽく聞こえない</li>
-                        <li style="margin: 10px 0;">⚡ ネイティブが話すと単語がつながって聞こえる</li>
-                        <li style="margin: 10px 0;">🎯 TOEICのリスニングで点数が伸び悩んでいる</li>
-                    </ul>
-                    <p style="margin-top: 15px; font-weight: bold; color: #667eea;">これらの悩みは「音声変化」を理解することで解決できます！</p>
+                <div class="reality-vs-theory">
+                    <div class="theory-box">
+                        <h4>📚 教科書英語の幻想</h4>
+                        <p>多くの教材は、各単語をはっきりと区切って発音することを前提としています。これは学習の第一歩としては有効ですが、実際のネイティブスピーカーの発話とは大きく異なります。</p>
+                    </div>
+                    <div class="reality-box">
+                        <h4>🎯 ストリートの現実</h4>
+                        <p>実際のアメリカ人は、音をつなげるだけでなく、音を変化させ、省略し、全く新しい音を作り出します。これを理解しないと、リスニングは永遠に困難なままです。</p>
+                    </div>
                 </div>
 
-                <div class="rule-box">
-                    <h3>🎯 音声変化をマスターすると...</h3>
-                    <ul style="list-style: none; padding-left: 0;">
-                        <li style="margin: 10px 0;">✅ <strong>リスニング力が劇的にアップ</strong> - 映画やドラマが字幕なしで楽しめる</li>
-                        <li style="margin: 10px 0;">✅ <strong>自然な発音で話せる</strong> - ネイティブのようなリズムで話せる</li>
-                        <li style="margin: 10px 0;">✅ <strong>英語が聞き取られやすくなる</strong> - 相手に聞き返されることが減る</li>
-                        <li style="margin: 10px 0;">✅ <strong>英語への自信がつく</strong> - 「英語らしい英語」が身につく</li>
-                    </ul>
-                </div>
+                <div class="step-by-step">
+                    <h3>🔍 実例で見る現実の衝撃</h3>
+                    
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h4>「Turn it on」の現実</h4>
+                            <p>教科書では「ターン・イット・オン」として習いますが、実際のアメリカ人は「タァリロン」のような音で発話します。これは複数の音韻変化が同時に起こった結果です。</p>
+                        </div>
+                    </div>
 
-                <div class="sound-change-types">
-                    <div class="type-card" onclick="jumpToSection('linking')">
-                        <div class="type-number">①</div>
-                        <div class="type-name">リンキング</div>
-                        <div class="type-english">Linking</div>
-                        <div class="type-description">音と音がつながる</div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h4>「Pick it up」の現実</h4>
+                            <p>理論的には「ピック・イット・アップ」ですが、街角では「ピキラッ」として聞こえます。これがフラッピングと音の脱落の組み合わせ効果です。</p>
+                        </div>
                     </div>
-                    <div class="type-card" onclick="jumpToSection('assimilation')">
-                        <div class="type-number">②</div>
-                        <div class="type-name">同化</div>
-                        <div class="type-english">Assimilation</div>
-                        <div class="type-description">音が影響し合い変化</div>
-                    </div>
-                    <div class="type-card" onclick="jumpToSection('flapping')">
-                        <div class="type-number">③</div>
-                        <div class="type-name">フラッピング</div>
-                        <div class="type-english">Flapping</div>
-                        <div class="type-description">T/Dがラ行音に</div>
-                    </div>
-                    <div class="type-card" onclick="jumpToSection('elision')">
-                        <div class="type-number">④</div>
-                        <div class="type-name">脱落</div>
-                        <div class="type-english">Elision</div>
-                        <div class="type-description">音が聞こえなくなる</div>
-                    </div>
-                    <div class="type-card" onclick="jumpToSection('contraction')">
-                        <div class="type-number">⑤</div>
-                        <div class="type-name">短縮</div>
-                        <div class="type-english">Contraction</div>
-                        <div class="type-description">単語が短くなる</div>
-                    </div>
-                    <div class="type-card" onclick="jumpToSection('reduction')">
-                        <div class="type-number">⑥</div>
-                        <div class="type-name">リダクション</div>
-                        <div class="type-english">Reduction</div>
-                        <div class="type-description">カジュアルな縮約</div>
-                    </div>
-                    <div class="type-card" onclick="jumpToSection('weakforms')">
-                        <div class="type-number">⑦</div>
-                        <div class="type-name">弱形</div>
-                        <div class="type-english">Weak Forms</div>
-                        <div class="type-description">機能語が弱く発音</div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h4>なぜこのギャップが生まれるのか</h4>
+                            <p>言語は効率性を求めて自然に変化します。発音しにくい音の組み合わせは避けられ、より楽に発音できる形に変化していきます。これは言語の自然な進化プロセスです。</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="section" id="linking">
-            <div class="section-header" onclick="toggleSection('linking')">
-                ① リンキング（Linking） - 音と音のつながり
+        <div class="section" id="pattern1-real">
+            <div class="section-header" onclick="toggleSection('pattern1-real')">
+                🔥 パターン1：子音→母音リンキング（リアル版）
                 <span class="arrow">▼</span>
             </div>
             <div class="section-content">
-                <div class="rule-box">
-                    <h3>🔗 リンキングとは？</h3>
-                    <p>前の単語の最後の音と、次の単語の最初の音がスムーズにつながって発音される現象です。</p>
-                    <p><strong>パターン：子音 + 母音</strong></p>
+                <div class="example-container">
+                    <div class="example-item">
+                        <div class="phrase-original">"Turn it on"</div>
+                        
+                        <div class="comparison-grid">
+                            <div class="textbook-pronunciation">
+                                <h5>📚 教科書発音</h5>
+                                <div class="phonetic-text">/tɜːrn ɪt ɔːn/</div>
+                                <div class="katakana-text">ターン イット オン</div>
+                            </div>
+                            <div class="real-pronunciation">
+                                <h5>🎯 リアル発音</h5>
+                                <div class="phonetic-text">/tɝn<span class="flapping-highlight">ɪɾ</span>ɔn/</div>
+                                <div class="katakana-text">タァ<span class="flapping-highlight">リ</span>ロン</div>
+                            </div>
+                        </div>
+
+                        <div class="explanation">
+                            <h5>🔬 何が起こっているのか？</h5>
+                            <p><strong>1. 母音の変化：</strong> "Turn"の/ɜːr/音は、アメリカ英語では舌の中央を盛り上げながらr音を作るため、「ターン」よりも「タァ」に近い音になります。</p>
+                            <p><strong>2. フラッピング：</strong> "it"の/t/が母音に挟まれているため、舌が歯茎を軽く叩く音（フラップ音/ɾ/）に変化し、日本語話者には「ラ行音」として聞こえます。</p>
+                            <p><strong>3. 弱化：</strong> "on"が文末で軽く発音され、「オン」から「ロン」のように聞こえます。</p>
+                        </div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="phrase-original">"Pick it up"</div>
+                        
+                        <div class="comparison-grid">
+                            <div class="textbook-pronunciation">
+                                <h5>📚 教科書発音</h5>
+                                <div class="phonetic-text">/pɪk ɪt ʌp/</div>
+                                <div class="katakana-text">ピック イット アップ</div>
+                            </div>
+                            <div class="real-pronunciation">
+                                <h5>🎯 リアル発音</h5>
+                                <div class="phonetic-text">/pɪk<span class="flapping-highlight">ɪɾ</span>ʌ(p)/</div>
+                                <div class="katakana-text">ピキ<span class="flapping-highlight">ラッ</span></div>
+                            </div>
+                        </div>
+
+                        <div class="explanation">
+                            <h5>🔬 分析</h5>
+                            <p><strong>1. フラッピング：</strong> "it"の/t/が再び/ɾ/に変化し、「ラ」音として実現されます。</p>
+                            <p><strong>2. 音の脱落：</strong> "up"の最後の/p/は、多くの場合完全に発音されないか、口の形は作るが音は出さない「unreleased stop」になります。</p>
+                            <p><strong>3. リズム圧縮：</strong> 3つの単語が1つの音韻単位として圧縮され、「ピキラッ」のような短い音列になります。</p>
+                        </div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="phrase-original">"Get it out"</div>
+                        
+                        <div class="comparison-grid">
+                            <div class="textbook-pronunciation">
+                                <h5>📚 教科書発音</h5>
+                                <div class="phonetic-text">/get ɪt aʊt/</div>
+                                <div class="katakana-text">ゲット イット アウト</div>
+                            </div>
+                            <div class="real-pronunciation">
+                                <h5>🎯 リアル発音</h5>
+                                <div class="phonetic-text">/ge<span class="flapping-highlight">ɾɪɾ</span>aʊt/</div>
+                                <div class="katakana-text">ゲ<span class="flapping-highlight">リラ</span>ウト</div>
+                            </div>
+                        </div>
+
+                        <div class="explanation">
+                            <h5>🔬 二重フラッピング</h5>
+                            <p>この例では、"get"の/t/と"it"の/t/の両方がフラッピングを起こし、「ゲリラウト」のような音になります。これは上級レベルの音韻変化です。</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="example-item">
-                    <div class="example-text">Turn <span class="linking-highlight">it</span> on</div>
-                    <div class="phonetic">/tɜːr<span class="linking-highlight">nɪt</span>ɔːn/</div>
-                    <p><strong>解説：</strong>「ターンイットオン」→「ターニットオン」</p>
-                    <button class="practice-button" onclick="playExample('turnit')">🔊 発音練習</button>
-                </div>
-
-                <div class="example-item">
-                    <div class="example-text">Check <span class="linking-highlight">it</span> out</div>
-                    <div class="phonetic">/tʃe<span class="linking-highlight">kɪt</span>aʊt/</div>
-                    <p><strong>解説：</strong>「チェックイットアウト」→「チェキットアウト」</p>
-                    <button class="practice-button" onclick="playExample('checkit')">🔊 発音練習</button>
-                </div>
-
-                <div class="example-item">
-                    <div class="example-text">Come <span class="linking-highlight">on</span></div>
-                    <div class="phonetic">/kʌ<span class="linking-highlight">mɔːn</span>/</div>
-                    <p><strong>解説：</strong>「カムオン」→「カモン」</p>
-                    <button class="practice-button" onclick="playExample('comeon')">🔊 発音練習</button>
+                <div class="regional-note">
+                    <p><strong>🗺️ 地域差について：</strong> これらの変化は主にアメリカ英語、特に西海岸や中西部の若年層でよく聞かれます。東海岸（ニューヨーク、ボストンなど）では若干異なることがあります。</p>
                 </div>
             </div>
         </div>
 
-        <div class="section" id="assimilation">
-            <div class="section-header" onclick="toggleSection('assimilation')">
-                ② 同化（Assimilation） - 音の相互影響
+        <div class="section" id="pattern2-real">
+            <div class="section-header" onclick="toggleSection('pattern2-real')">
+                ⚡ パターン2：フラッピングの威力（アメリカ英語特化）
                 <span class="arrow">▼</span>
             </div>
             <div class="section-content">
-                <div class="rule-box">
-                    <h3>🤝 同化とは？</h3>
-                    <p>隣り合う2つの音が影響し合い、全く新しい音に変化する現象です。</p>
-                    <p><strong>特に /t/ + /y/, /d/ + /y/, /s/ + /y/ の組み合わせでよく起こります</strong></p>
+                <div class="tips-box">
+                    <h3>🎯 フラッピングとは何か？</h3>
+                    <p>フラッピング（Flapping）は、/t/や/d/の音が、特定の条件下で日本語の「ラ行音」に似た音/ɾ/に変化する現象です。これはアメリカ英語の最も特徴的な音韻変化の一つで、この変化を理解しないとアメリカ英語のリスニングは困難を極めます。</p>
                 </div>
 
-                <div class="example-item">
-                    <div class="example-text">What <span class="linking-highlight">do you</span> think?</div>
-                    <div class="phonetic">/wʌt <span class="linking-highlight">dʒuː</span> θɪŋk/</div>
-                    <p><strong>解説：</strong>「ホワット ドゥー ユー」→「ホワッジュー」</p>
-                    <button class="practice-button" onclick="playExample('whatdoyou')">🔊 発音練習</button>
+                <div class="step-by-step">
+                    <h3>📋 フラッピングが起こる条件</h3>
+                    
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h4>母音に挟まれた位置</h4>
+                            <p>/t/や/d/が母音と母音の間にある場合、フラッピングが起こりやすくなります。"water", "better", "city"などが典型例です。</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h4>アクセントのない音節</h4>
+                            <p>強勢のない音節にある/t/や/d/は、フラッピングしやすい傾向があります。話者が楽に発音しようとする自然な結果です。</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h4>語境界を越えたフラッピング</h4>
+                            <p>単語内だけでなく、"get it", "put on"のような語境界でもフラッピングが発生します。これが学習者にとって最も困難な部分です。</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="example-item">
-                    <div class="example-text">Nice to <span class="linking-highlight">meet you</span></div>
-                    <div class="phonetic">/naɪs tuː <span class="linking-highlight">miːtʃuː</span>/</div>
-                    <p><strong>解説：</strong>「ミート ユー」→「ミーチュー」</p>
-                    <button class="practice-button" onclick="playExample('meetyou')">🔊 発音練習</button>
+                <div class="example-container">
+                    <div class="example-item">
+                        <div class="phrase-original">"What are you doing?"</div>
+                        
+                        <div class="comparison-grid">
+                            <div class="textbook-pronunciation">
+                                <h5>📚 教科書発音</h5>
+                                <div class="phonetic-text">/wʌt ɑːr juː duːɪŋ/</div>
+                                <div class="katakana-text">ワット アー ユー ドゥーイング</div>
+                            </div>
+                            <div class="real-pronunciation">
+                                <h5>🎯 リアル発音</h5>
+                                <div class="phonetic-text">/wʌ<span class="flapping-highlight">ɾər</span>jə <span class="flapping-highlight">duː</span>ɪŋ/</div>
+                                <div class="katakana-text">ワ<span class="flapping-highlight">ラヤ</span> <span class="flapping-highlight">ドゥー</span>イン</div>
+                            </div>
+                        </div>
+
+                        <div class="explanation">
+                            <h5>🔬 複合的変化の分析</h5>
+                            <p><strong>1. フラッピング：</strong> "What"の/t/が「ワラ」の「ラ」音になります。</p>
+                            <p><strong>2. 弱形化：</strong> "are"が/ɑːr/から/ər/に、"you"が/juː/から/jə/に弱化します。</p>
+                            <p><strong>3. 全体圧縮：</strong> 4つの単語が2つの音韻塊「ワラヤ ドゥーイン」に圧縮されます。</p>
+                        </div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="phrase-original">"Better late than never"</div>
+                        
+                        <div class="comparison-grid">
+                            <div class="textbook-pronunciation">
+                                <h5>📚 教科書発音</h5>
+                                <div class="phonetic-text">/betər leɪt ðæn nevər/</div>
+                                <div class="katakana-text">ベター レイト ザン ネバー</div>
+                            </div>
+                            <div class="real-pronunciation">
+                                <h5>🎯 リアル発音</h5>
+                                <div class="phonetic-text">/be<span class="flapping-highlight">ɾər</span> leɪ<span class="flapping-highlight">ɾæn</span> ne<span class="flapping-highlight">vər</span>/</div>
+                                <div class="katakana-text">ベ<span class="flapping-highlight">ラー</span> レイ<span class="flapping-highlight">ラン</span> ネ<span class="flapping-highlight">バー</span></div>
+                            </div>
+                        </div>
+
+                        <div class="explanation">
+                            <h5>🔬 連続フラッピング</h5>
+                            <p>この格言では、"better"の/t/, "late than"の/t/→/ɾ/, "never"の語末/r/音が全てフラッピングまたは類似の変化を起こし、「ラ行音」が連続して現れます。</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="example-item">
-                    <div class="example-text">How <span class="linking-highlight">did you</span> know?</div>
-                    <div class="phonetic">/haʊ <span class="linking-highlight">dɪdʒuː</span> noʊ/</div>
-                    <p><strong>解説：</strong>「ディド ユー」→「ディジュー」</p>
-                    <button class="practice-button" onclick="playExample('didyou')">🔊 発音練習</button>
+                <div class="listening-exercise">
+                    <h3>🎧 フラッピング聞き取り練習</h3>
+                    <p>以下の文では、どこでフラッピングが起こっているか探してみましょう。</p>
+                    
+                    <div class="exercise-item">
+                        <p><strong>練習文：</strong> "I got to get up early tomorrow."</p>
+                        <details style="margin-top: 15px;">
+                            <summary style="cursor: pointer; color: #667eea; font-weight: bold;">答えと解説を見る</summary>
+                            <div style="margin-top: 15px; padding: 15px; background: #f8f9ff; border-radius: 8px;">
+                                <p><strong>リアル発音：</strong> 「アイガラゲラップ アーリー トゥマロ」</p>
+                                <p><strong>フラッピング箇所：</strong></p>
+                                <ul style="padding-left: 20px; margin-top: 10px;">
+                                    <li>"got to" → "gotta" → 「ガラ」</li>
+                                    <li>"get up" → 「ゲラップ」</li>
+                                </ul>
+                                <p>この文では/t/が3回フラッピングを起こしています。</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="exercise-item">
+                        <p><strong>練習文：</strong> "Put it on the table."</p>
+                        <details style="margin-top: 15px;">
+                            <summary style="cursor: pointer; color: #667eea; font-weight: bold;">答えと解説を見る</summary>
+                            <div style="margin-top: 15px; padding: 15px; background: #f8f9ff; border-radius: 8px;">
+                                <p><strong>リアル発音：</strong> 「プリロン ザ テイボー」</p>
+                                <p><strong>変化：</strong> "Put it on" → "プリロン"（複数のフラッピングとリンキング）</p>
+                            </div>
+                        </details>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="section" id="flapping">
-            <div class="section-header" onclick="toggleSection('flapping')">
-                ③ フラッピング（Flapping） - T/Dがラ行音に
+        <div class="section" id="advanced-patterns">
+            <div class="section-header" onclick="toggleSection('advanced-patterns')">
+                🚀 上級パターン：音の脱落と同化
                 <span class="arrow">▼</span>
             </div>
             <div class="section-content">
-                <div class="rule-box">
-                    <h3>🎵 フラッピングとは？</h3>
-                    <p>母音に挟まれた /t/ や /d/ が、日本語の「ラ行」のような音に変化する現象です。</p>
-                    <p><strong>特にアメリカ英語でよく聞かれます！</strong></p>
+                <div class="warning-box">
+                    <h3>⚠️ 上級者向け注意事項</h3>
+                    <p>ここからの内容は、ネイティブスピーカーでも地域や個人によって大きく異なる変化を扱います。「正解」が一つではないことを理解して学習してください。</p>
                 </div>
 
-                <div class="example-item">
-                    <div class="example-text">Wa<span class="linking-highlight">t</span>er</div>
-                    <div class="phonetic">/wɔː<span class="linking-highlight">ɾ</span>ər/</div>
-                    <p><strong>解説：</strong>「ウォーター」→「ウォーラー」</p>
-                    <button class="practice-button" onclick="playExample('water')">🔊 発音練習</button>
-                </div>
+                <div class="example-container">
+                    <div class="example-item">
+                        <div class="phrase-original">"I don't know"</div>
+                        
+                        <div class="comparison-grid">
+                            <div class="textbook-pronunciation">
+                                <h5>📚 教科書発音</h5>
+                                <div class="phonetic-text">/aɪ doʊnt noʊ/</div>
+                                <div class="katakana-text">アイ ドントゥ ノウ</div>
+                            </div>
+                            <div class="real-pronunciation">
+                                <h5>🎯 リアル発音</h5>
+                                <div class="phonetic-text">/aɪ <span class="flapping-highlight">doʊno</span>/ または /aɪ <span class="flapping-highlight">dəno</span>/</div>
+                                <div class="katakana-text">アイ <span class="flapping-highlight">ドーノ</span></div>
+                            </div>
+                        </div>
 
-                <div class="example-item">
-                    <div class="example-text">Be<span class="linking-highlight">tt</span>er</div>
-                    <div class="phonetic">/be<span class="linking-highlight">ɾ</span>ər/</div>
-                    <p><strong>解説：</strong>「ベター」→「ベラー」</p>
-                    <button class="practice-button" onclick="playExample('better')">🔊 発音練習</button>
-                </div>
+                        <div class="explanation">
+                            <h5>🔬 /t/の完全脱落</h5>
+                            <p>カジュアルな会話では、"don't"の/t/が完全に脱落し、"don't know"が"dono"のような音になることがあります。これは特に若年層の間で顕著です。</p>
+                        </div>
+                    </div>
 
-                <div class="example-item">
-                    <div class="example-text">A li<span class="linking-highlight">tt</span>le bit</div>
-                    <div class="phonetic">/ə lɪ<span class="linking-highlight">ɾ</span>əl bɪt/</div>
-                    <p><strong>解説：</strong>「ア リトル ビット」→「ア リラル ビット」</p>
-                    <button class="practice-button" onclick="playExample('alittle')">🔊 発音練習</button>
-                </div>
-            </div>
-        </div>
+                    <div class="example-item">
+                        <div class="phrase-original">"What you gonna do?"</div>
+                        
+                        <div class="comparison-grid">
+                            <div class="textbook-pronunciation">
+                                <h5>📚 教科書発音</h5>
+                                <div class="phonetic-text">/wʌt juː goʊɪŋ tuː duː/</div>
+                                <div class="katakana-text">ワット ユー ゴーイング トゥー ドゥー</div>
+                            </div>
+                            <div class="real-pronunciation">
+                                <h5>🎯 リアル発音</h5>
+                                <div class="phonetic-text">/wʌ<span class="flapping-highlight">tʃə gənə</span> duː/</div>
+                                <div class="katakana-text">ワ<span class="flapping-highlight">チャ ガナ</span> ドゥー</div>
+                            </div>
+                        </div>
 
-        <div class="section" id="elision">
-            <div class="section-header" onclick="toggleSection('elision')">
-                ④ 脱落（Elision） - 音の消失
-                <span class="arrow">▼</span>
-            </div>
-            <div class="section-content">
-                <div class="rule-box">
-                    <h3>👻 脱落とは？</h3>
-                    <p>本来発音されるべき音が、聞こえなくなったり、非常に弱く発音される現象です。</p>
-                    <p><strong>特に破裂音（/p/, /b/, /t/, /d/, /k/, /g/）で起こりやすい</strong></p>
-                </div>
+                        <div class="explanation">
+                            <h5>🔬 同化現象</h5>
+                            <p><strong>1. 同化：</strong> "What you"で/t/+/j/が/tʃ/（チ音）に同化します。</p>
+                            <p><strong>2. 縮約：</strong> "going to"が"gonna"に縮約されます。</p>
+                            <p><strong>3. 弱化：</strong> "you"が/juː/から/jə/に弱化します。</p>
+                        </div>
+                    </div>
 
-                <div class="example-item">
-                    <div class="example-text">Mos<span class="linking-highlight">(t)</span> people</div>
-                    <div class="phonetic">/moʊs piːpəl/</div>
-                    <p><strong>解説：</strong> /t/ の音が脱落して「モウス ピープル」</p>
-                    <button class="practice-button" onclick="playExample('mostpeople')">🔊 発音練習</button>
-                </div>
+                    <div class="example-item">
+                        <div class="phrase-original">"Did you eat yet?"</div>
+                        
+                        <div class="comparison-grid">
+                            <div class="textbook-pronunciation">
+                                <h5>📚 教科書発音</h5>
+                                <div class="phonetic-text">/dɪd juː iːt jet/</div>
+                                <div class="katakana-text">ディド ユー イート イエット</div>
+                            </div>
+                            <div class="real-pronunciation">
+                                <h5>🎯 リアル発音</h5>
+                                <div class="phonetic-text">/dɪ<span class="flapping-highlight">dʒə</span> iː<span class="flapping-highlight">tʃe</span>t/</div>
+                                <div class="katakana-text">ディ<span class="flapping-highlight">ジャ</span> イー<span class="flapping-highlight">チェ</span>ット</div>
+                            </div>
+                        </div>
 
-                <div class="example-item">
-                    <div class="example-text">Nex<span class="linking-highlight">(t)</span> month</div>
-                    <div class="phonetic">/neks mʌnθ/</div>
-                    <p><strong>解説：</strong> /t/ の音が脱落して「ネクス マンス」</p>
-                    <button class="practice-button" onclick="playExample('nextmonth')">🔊 発音練習</button>
-                </div>
-
-                <div class="example-item">
-                    <div class="example-text">Goo<span class="linking-highlight">(d)</span> morning</div>
-                    <div class="phonetic">/gʊ mɔːrnɪŋ/</div>
-                    <p><strong>解説：</strong> /d/ の音が脱落して「グッ モーニング」</p>
-                    <button class="practice-button" onclick="playExample('goodmorning')">🔊 発音練習</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="section" id="contraction">
-            <div class="section-header" onclick="toggleSection('contraction')">
-                ⑤ 短縮（Contraction） - 単語の縮約
-                <span class="arrow">▼</span>
-            </div>
-            <div class="section-content">
-                <div class="rule-box">
-                    <h3>✂️ 短縮とは？</h3>
-                    <p>複数の単語を組み合わせて短くする、正式に認められた縮約形です。</p>
-                    <p><strong>書き言葉でも話し言葉でも幅広く使われます</strong></p>
-                </div>
-
-                <div class="example-item">
-                    <div class="example-text">I <span class="linking-highlight">am</span> → I<span class="linking-highlight">'m</span></div>
-                    <div class="phonetic">/aɪ æm/ → /aɪm/</div>
-                    <p><strong>解説：</strong>「アイ アム」→「アイム」</p>
-                    <button class="practice-button" onclick="playExample('iam')">🔊 発音練習</button>
-                </div>
-
-                <div class="example-item">
-                    <div class="example-text">You <span class="linking-highlight">are</span> → You<span class="linking-highlight">'re</span></div>
-                    <div class="phonetic">/juː ɑːr/ → /jʊr/</div>
-                    <p><strong>解説：</strong>「ユー アー」→「ユア」</p>
-                    <button class="practice-button" onclick="playExample('youare')">🔊 発音練習</button>
-                </div>
-
-                <div class="example-item">
-                    <div class="example-text">I <span class="linking-highlight">will</span> → I<span class="linking-highlight">'ll</span></div>
-                    <div class="phonetic">/aɪ wɪl/ → /aɪl/</div>
-                    <p><strong>解説：</strong>「アイ ウィル」→「アイル」</p>
-                    <button class="practice-button" onclick="playExample('iwill')">🔊 発音練習</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="section" id="reduction">
-            <div class="section-header" onclick="toggleSection('reduction')">
-                ⑥ リダクション（Reduction） - カジュアルな縮約
-                <span class="arrow">▼</span>
-            </div>
-            <div class="section-content">
-                <div class="rule-box">
-                    <h3>🗣️ リダクションとは？</h3>
-                    <p>主にカジュアルな会話で使われる、非公式な短縮形です。</p>
-                    <p><strong>注意：フォーマルな場では使用を控えましょう</strong></p>
-                </div>
-
-                <div class="example-item">
-                    <div class="example-text">Going to → <span class="linking-highlight">Gonna</span></div>
-                    <div class="phonetic">/goʊɪŋ tuː/ → /gənə/</div>
-                    <p><strong>解説：</strong>「ゴーイング トゥー」→「ガナ」</p>
-                    <button class="practice-button" onclick="playExample('gonna')">🔊 発音練習</button>
-                </div>
-
-                <div class="example-item">
-                    <div class="example-text">Want to → <span class="linking-highlight">Wanna</span></div>
-                    <div class="phonetic">/wɑːnt tuː/ → /wənə/</div>
-                    <p><strong>解説：</strong>「ウォント トゥー」→「ワナ」</p>
-                    <button class="practice-button" onclick="playExample('wanna')">🔊 発音練習</button>
-                </div>
-
-                <div class="example-item">
-                    <div class="example-text">Give me → <span class="linking-highlight">Gimme</span></div>
-                    <div class="phonetic">/gɪv miː/ → /gɪmi/</div>
-                    <p><strong>解説：</strong>「ギブ ミー」→「ギミー」</p>
-                    <button class="practice-button" onclick="playExample('gimme')">🔊 発音練習</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="section" id="weakforms">
-            <div class="section-header" onclick="toggleSection('weakforms')">
-                ⑦ 弱形（Weak Forms） - 機能語の弱化
-                <span class="arrow">▼</span>
-            </div>
-            <div class="section-content">
-                <div class="rule-box">
-                    <h3>🔉 弱形とは？</h3>
-                    <p>前置詞、冠詞、助動詞などの機能語が、文中で弱く曖昧に発音される現象です。</p>
-                    <p><strong>英語らしいリズムを作る重要な要素です</strong></p>
-                </div>
-
-                <div class="example-item">
-                    <div class="example-text">I went <span class="linking-highlight">to</span> the store</div>
-                    <div class="phonetic">/aɪ went <span class="linking-highlight">tə</span> ðə stɔːr/</div>
-                    <p><strong>解説：</strong> "to" が /tuː/ から /tə/ に弱化</p>
-                    <button class="practice-button" onclick="playExample('wentto')">🔊 発音練習</button>
-                </div>
-
-                <div class="example-item">
-                    <div class="example-text">He <span class="linking-highlight">can</span> swim</div>
-                    <div class="phonetic">/hiː <span class="linking-highlight">kən</span> swɪm/</div>
-                    <p><strong>解説：</strong> "can" が /kæn/ から /kən/ に弱化</p>
-                    <button class="practice-button" onclick="playExample('hecan')">🔊 発音練習</button>
-                </div>
-
-                <div class="example-item">
-                    <div class="example-text">Look <span class="linking-highlight">at</span> that</div>
-                    <div class="phonetic">/lʊk <span class="linking-highlight">ət</span> ðæt/</div>
-                    <p><strong>解説：</strong> "at" が /æt/ から /ət/ に弱化</p>
-                    <button class="practice-button" onclick="playExample('lookat')">🔊 発音練習</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="section" id="practice">
-            <div class="section-header" onclick="toggleSection('practice')">
-                🎯 総合練習テスト
-                <span class="arrow">▼</span>
-            </div>
-            <div class="section-content">
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress"></div>
-                </div>
-                
-                <div class="quiz-container" id="quiz-container">
-                    <div class="quiz-question" id="quiz-question">次のフレーズでどの音声変化が起きているでしょう？</div>
-                    <div id="current-phrase" style="font-size: 1.4em; margin: 15px 0; text-align: center;"></div>
-                    <div class="quiz-options" id="quiz-options"></div>
-                    <button class="practice-button" onclick="nextQuestion()" id="next-btn" style="display: none;">次の問題</button>
+                        <div class="explanation">
+                            <h5>🔬 連続同化</h5>
+                            <p>この文では2箇所で同化が発生します：</p>
+                            <p><strong>1.</strong> "Did you" → /dɪdʒə/ 「ディジャ」</p>
+                            <p><strong>2.</strong> "eat yet" → /iːtʃet/ 「イーチェット」</p>
+                            <p>結果として「ディジャ イーチェット」のような音になります。</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="tips-box">
-                    <h4>🎓 まとめ：音声変化マスターへの道</h4>
-                    <p><strong>🎯 7つの音声変化を身につけることで...</strong></p>
-                    <ul>
-                        <li><strong>リスニング力大幅UP</strong> - 映画やドラマが字幕なしで理解できる</li>
-                        <li><strong>自然な発音</strong> - ネイティブのようなリズムで話せる</li>
-                        <li><strong>コミュニケーション改善</strong> - 相手に聞き返されることが激減</li>
-                        <li><strong>英語への自信向上</strong> - 「英語らしい英語」が身につく</li>
-                    </ul>
-                    
-                    <h4 style="margin-top: 20px;">🚀 次のステップ</h4>
-                    <ol style="padding-left: 20px;">
-                        <li><strong>実践練習：</strong> 映画やドラマで音声変化を意識して聞く</li>
-                        <li><strong>シャドーイング：</strong> ネイティブの音声に合わせて練習</li>
-                        <li><strong>録音比較：</strong> 自分の発音を録音してネイティブと比較</li>
-                        <li><strong>継続学習：</strong> 毎日少しずつでも続けることが重要</li>
-                    </ol>
-                    
-                    <p style="margin-top: 15px; font-weight: bold; color: #667eea;">
-                        頑張ってください！ネイティブレベルの英語はもうすぐそこです🌟
-                    </p>
+                    <h3>🎯 実践的学習アドバイス</h3>
+                    <p>これらの変化は、まず「こういう音で聞こえることがある」ということを知ることから始めましょう。完璧に真似する必要はありません。重要なのは、実際にこのような音で話されたときに理解できることです。</p>
+                    <p>また、これらの変化は話者の年齢、地域、教育レベル、フォーマル度によって大きく異なります。ビジネスの場では控えめに、友人同士ではより顕著に現れる傾向があります。</p>
                 </div>
             </div>
         </div>
 
-        <div class="section" id="applications">
-            <div class="section-header" onclick="toggleSection('applications')">
-                🌟 実践フレーズ集
+        <div class="section" id="practice-real">
+            <div class="section-header" onclick="toggleSection('practice-real')">
+                🎪 実践練習：映画・ドラマレベルの英語
                 <span class="arrow">▼</span>
             </div>
             <div class="section-content">
-                <h3>🗣️ 日常会話でよく使われるフレーズ</h3>
-                
-                <div class="example-item">
-                    <div class="example-text">What <span class="linking-highlight">are you</span> doing?</div>
-                    <div class="phonetic">/wʌ<span class="linking-highlight">tɑːr ju</span> duːɪŋ/</div>
-                    <p><strong>音声変化：</strong> リンキング + 弱形</p>
-                    <button class="practice-button" onclick="practicePhrase(this)">練習</button>
+                <div class="listening-exercise">
+                    <h3>🎬 シーン別リスニング練習</h3>
+                    <p>実際の映画やドラマで使われるような自然な会話を分析してみましょう。</p>
+                    
+                    <div class="exercise-item">
+                        <h4>💼 オフィスでの会話</h4>
+                        <p><strong>会話：</strong> "Are you going to the meeting at three?"</p>
+                        <details style="margin-top: 15px;">
+                            <summary style="cursor: pointer; color: #667eea; font-weight: bold;">リアル発音を確認</summary>
+                            <div style="margin-top: 15px; padding: 20px; background: #f8f9ff; border-radius: 10px;">
+                                <p><strong>教科書：</strong> 「アー ユー ゴーイング トゥー ザ ミーティング エット スリー」</p>
+                                <p><strong>現実：</strong> 「アヤ ガナ ザ ミーリン アト スリー」</p>
+                                <div style="margin-top: 15px; padding: 15px; background: #e3f2fd; border-radius: 8px;">
+                                    <p><strong>主な変化：</strong></p>
+                                    <ul style="padding-left: 20px;">
+                                        <li>"Are you" → "Are ya" 「アヤ」</li>
+                                        <li>"going to" → "gonna" 「ガナ」</li>
+                                        <li>"meeting" → "meetin'" 「ミーリン」（g音脱落）</li>
+                                        <li>"at" → 弱形 「アト」</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="exercise-item">
+                        <h4>🏠 家族での会話</h4>
+                        <p><strong>会話：</strong> "What do you want for dinner tonight?"</p>
+                        <details style="margin-top: 15px;">
+                            <summary style="cursor: pointer; color: #667eea; font-weight: bold;">リアル発音を確認</summary>
+                            <div style="margin-top: 15px; padding: 20px; background: #f8f9ff; border-radius: 10px;">
+                                <p><strong>教科書：</strong> 「ワット ドゥー ユー ワント フォー ディナー トゥナイト」</p>
+                                <p><strong>現実：</strong> 「ワラヤ ワン フォー ディナー トゥナイ」</p>
+                                <div style="margin-top: 15px; padding: 15px; background: #e3f2fd; border-radius: 8px;">
+                                    <p><strong>主な変化：</strong></p>
+                                    <ul style="padding-left: 20px;">
+                                        <li>"What do you" → "Whaddya" 「ワラヤ」（フラッピング+弱化）</li>
+                                        <li>"want" → "wan'" 「ワン」（t音脱落）</li>
+                                        <li>"tonight" → "tonigh'" 「トゥナイ」（t音脱落）</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="exercise-item">
+                        <h4>👥 友達同士の会話</h4>
+                        <p><strong>会話：</strong> "I can't believe you did that!"</p>
+                        <details style="margin-top: 15px;">
+                            <summary style="cursor: pointer; color: #667eea; font-weight: bold;">リアル発音を確認</summary>
+                            <div style="margin-top: 15px; padding: 20px; background: #f8f9ff; border-radius: 10px;">
+                                <p><strong>教科書：</strong> 「アイ キャント ビリーブ ユー ディド ザット」</p>
+                                <p><strong>現実：</strong> 「アイ キャン ビリーブ ユー ディ ザッ」</p>
+                                <div style="margin-top: 15px; padding: 15px; background: #e3f2fd; border-radius: 8px;">
+                                    <p><strong>主な変化：</strong></p>
+                                    <ul style="padding-left: 20px;">
+                                        <li>"can't" → "can" 「キャン」（t音脱落）</li>
+                                        <li>"did" → "di'" 「ディ」（d音弱化）</li>
+                                        <li>"that" → "tha'" 「ザッ」（t音脱落）</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
                 </div>
 
-                <div class="example-item">
-                    <div class="example-text">I'm <span class="linking-highlight">gonna</span> get it</div>
-                    <div class="phonetic">/aɪm <span class="linking-highlight">gənə</span> get ɪt/</div>
-                    <p><strong>音声変化：</strong> 短縮 + リダクション + リンキング</p>
-                    <button class="practice-button" onclick="practicePhrase(this)">練習</button>
+                <div class="step-by-step">
+                    <h3>🏆 上達のための段階的アプローチ</h3>
+                    
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h4>まずは聞き慣れる</h4>
+                            <p>無理に真似しようとせず、まずは「こういう音で話されることがある」ということに慣れましょう。YouTubeの日常系Vlogやカジュアルなポッドキャストがおすすめです。</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h4>パターンを意識する</h4>
+                            <p>音の変化にはパターンがあることを理解し、「あ、今フラッピングが起こった」「同化が発生している」と意識的に気づけるようになりましょう。</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h4>段階的に取り入れる</h4>
+                            <p>まずは最も基本的なフラッピングから始めて、徐々に複雑な変化を取り入れていきます。完璧を目指さず、自然さを重視しましょう。</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div>
+                            <h4>文脈に応じて使い分ける</h4>
+                            <p>フォーマルな場面では控えめに、カジュアルな場面ではより自然に。相手や状況に応じて使い分けられるようになることが最終目標です。</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="example-item">
-                    <div class="example-text">Can<span class="linking-highlight">'t</span> you see?</div>
-                    <div class="phonetic">/kæn<span class="linking-highlight">tʃu</span> siː/</div>
-                    <p><strong>音声変化：</strong> 短縮 + 同化</p>
-                    <button class="practice-button" onclick="practicePhrase(this)">練習</button>
-                </div>
-
-                <div class="example-item">
-                    <div class="example-text">Gotta <span class="linking-highlight">lot of</span> work</div>
-                    <div class="phonetic">/gɑːtə <span class="linking-highlight">lɑːɾə</span> wɜːrk/</div>
-                    <p><strong>音声変化：</strong> リダクション + フラッピング + 弱形</p>
-                    <button class="practice-button" onclick="practicePhrase(this)">練習</button>
-                </div>
-
-                <div class="example-item">
-                    <div class="example-text">Didn<span class="linking-highlight">'t</span> he tell you?</div>
-                    <div class="phonetic">/dɪdn̩<span class="linking-highlight">tiː</span> tel juː/</div>
-                    <p><strong>音声変化：</strong> 短縮 + リンキング + 弱形</p>
-                    <button class="practice-button" onclick="practicePhrase(this)">練習</button>
+                <div class="regional-note">
+                    <p><strong>🎯 学習の心構え：</strong> これらの音韻変化は、アメリカ英語の自然な特徴です。「正しい」「間違い」ではなく、「よりネイティブらしい」「より自然な」という観点で理解しましょう。また、すべてを完璧に真似る必要はありません。最も重要なのは、このような音で話されたときに理解できることです。</p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let currentQuestionIndex = 0;
-        let score = 0;
-        
-        const quizData = [
-            {
-                phrase: "What do you think?",
-                options: ["リンキング", "同化", "フラッピング", "脱落"],
-                correct: 1,
-                explanation: "/t/ + /y/ → /tʃ/ の同化が起こります (「ホワッジュー」)"
-            },
-            {
-                phrase: "Water bottle",
-                options: ["リンキング", "同化", "フラッピング", "弱形"],
-                correct: 2,
-                explanation: "母音に挟まれた /t/ がラ行音 /ɾ/ に変化します (「ウォーラー」)"
-            },
-            {
-                phrase: "Next time",
-                options: ["脱落", "短縮", "リダクション", "弱形"],
-                correct: 0,
-                explanation: "/t/ の音が脱落して「ネクス タイム」になります"
-            },
-            {
-                phrase: "I'm gonna go",
-                options: ["短縮のみ", "リダクションのみ", "短縮とリダクション", "リンキング"],
-                correct: 2,
-                explanation: "I'm (短縮) + gonna (リダクション) の両方が含まれています"
-            },
-            {
-                phrase: "Look at the cat",
-                options: ["リンキング", "同化", "脱落", "弱形"],
-                correct: 3,
-                explanation: "at, the が弱形 /ət/, /ðə/ で発音されます"
-            },
-            {
-                phrase: "Turn it on",
-                options: ["リンキング", "同化", "フラッピング", "脱落"],
-                correct: 0,
-                explanation: "turn と it がつながって「ターニットン」になります"
-            },
-            {
-                phrase: "Give me that",
-                options: ["短縮", "リダクション", "同化", "弱形"],
-                correct: 1,
-                explanation: "Give me が gimme /gɪmi/ にリダクションされます"
-            },
-            {
-                phrase: "Better late than never",
-                options: ["リンキング", "同化", "フラッピング", "弱形"],
-                correct: 2,
-                explanation: "better の /tt/ がフラッピングして「ベラー」になります"
-            }
-        ];
-
-        function jumpToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-                if (!section.classList.contains('active')) {
-                    toggleSection(sectionId);
-                }
-            }
-        }
-
         function toggleSection(sectionId) {
             const section = document.getElementById(sectionId);
             section.classList.toggle('active');
         }
 
-        function playExample(exampleId) {
-            // 実際の音声再生は省略（Web Speech API等で実装可能）
-            const button = event.target;
-            button.style.background = 'linear-gradient(135deg, #4caf50 0%, #45a049 100%)';
-            button.textContent = '🎵 再生中...';
-            
-            setTimeout(() => {
-                button.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                button.textContent = '🔊 発音練習';
-            }, 1500);
-        }
-
-        function practicePhrase(button) {
-            button.style.background = 'linear-gradient(135deg, #ff6b6b 0%, #ff5722 100%)';
-            button.textContent = '練習中...';
-            
-            setTimeout(() => {
-                button.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                button.textContent = '練習';
-            }, 2000);
-        }
-
-        function loadQuestion() {
-            if (currentQuestionIndex >= quizData.length) {
-                showResults();
-                return;
-            }
-
-            const question = quizData[currentQuestionIndex];
-            document.getElementById('current-phrase').textContent = question.phrase;
-            
-            const optionsContainer = document.getElementById('quiz-options');
-            optionsContainer.innerHTML = '';
-            
-            question.options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'quiz-option';
-                optionElement.textContent = option;
-                optionElement.onclick = () => selectAnswer(index);
-                optionsContainer.appendChild(optionElement);
-            });
-            
-            document.getElementById('next-btn').style.display = 'none';
-        }
-
-        function selectAnswer(selectedIndex) {
-            const question = quizData[currentQuestionIndex];
-            const options = document.querySelectorAll('.quiz-option');
-            
-            options.forEach((option, index) => {
-                if (index === question.correct) {
-                    option.classList.add('correct');
-                } else if (index === selectedIndex && index !== question.correct) {
-                    option.classList.add('incorrect');
-                }
-                option.onclick = null; // 選択を無効化
-            });
-            
-            if (selectedIndex === question.correct) {
-                score++;
-            }
-            
-            // 解説表示
-            const explanation = document.createElement('div');
-            explanation.style.marginTop = '15px';
-            explanation.style.padding = '15px';
-            explanation.style.background = 'rgba(255, 255, 255, 0.3)';
-            explanation.style.borderRadius = '10px';
-            explanation.innerHTML = `<strong>解説:</strong> ${question.explanation}`;
-            document.getElementById('quiz-container').appendChild(explanation);
-            
-            document.getElementById('next-btn').style.display = 'inline-block';
-            
-            // プログレスバー更新
-            const progress = ((currentQuestionIndex + 1) / quizData.length) * 100;
-            document.getElementById('progress').style.width = progress + '%';
-        }
-
-        function nextQuestion() {
-            currentQuestionIndex++;
-            
-            // 解説を削除
-            const explanation = document.querySelector('#quiz-container > div:last-child');
-            if (explanation && explanation.innerHTML.includes('解説:')) {
-                explanation.remove();
-            }
-            
-            loadQuestion();
-        }
-
-        function showResults() {
-            const percentage = Math.round((score / quizData.length) * 100);
-            let message = "";
-            let advice = "";
-            
-            if (percentage >= 90) {
-                message = "🎉 素晴らしい！音声変化マスターですね！";
-                advice = "完璧です！実際の会話やリスニングでこの知識を活用してください。";
-            } else if (percentage >= 70) {
-                message = "👏 よく理解できています！";
-                advice = "もう少し練習すれば完璧です。特に間違えた音声変化を重点的に復習してみてください。";
-            } else if (percentage >= 50) {
-                message = "📚 基本は理解できています！";
-                advice = "各音声変化の特徴をもう一度確認し、実際のフレーズで練習してみましょう。";
-            } else {
-                message = "💪 まだまだ伸びしろがあります！";
-                advice = "焦らず一つずつの音声変化を確実に理解していきましょう。実践あるのみです！";
-            }
-            
-            document.getElementById('quiz-container').innerHTML = `
-                <div style="text-align: center;">
-                    <h2>${message}</h2>
-                    <div style="font-size: 2.5em; margin: 20px 0; color: #667eea;">${score} / ${quizData.length}</div>
-                    <p style="font-size: 1.2em; margin: 20px 0;">正答率: ${percentage}%</p>
-                    <p style="margin: 20px 0; padding: 15px; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); border-radius: 10px; color: #333;">
-                        ${advice}
-                    </p>
-                    <button class="practice-button" onclick="restartQuiz()" style="margin-top: 20px;">もう一度挑戦</button>
-                    <button class="practice-button" onclick="jumpToSection('overview')" style="margin-top: 20px; margin-left: 10px;">概要に戻る</button>
-                </div>
-            `;
-        }
-
-        function restartQuiz() {
-            currentQuestionIndex = 0;
-            score = 0;
-            document.getElementById('progress').style.width = '0%';
-            loadQuestion();
-        }
-
         // 初期化
         document.addEventListener('DOMContentLoaded', function() {
-            // 最初のセクション（概要）を開く
-            document.getElementById('overview').classList.add('active');
-            
-            // クイズ開始
-            loadQuestion();
+            // 最初のセクション（現実ショック）を開く
+            document.getElementById('reality-check').classList.add('active');
         });
     </script>
 </body>
