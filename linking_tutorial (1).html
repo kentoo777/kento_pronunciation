@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英語リンキング完全マスター教材</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: #fff;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            border-color: #667eea;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 25px;
+            font-size: 1.4em;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .section-header:hover {
+            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+        }
+
+        .section-content {
+            padding: 30px;
+            display: none;
+            background: #f9fafb;
+        }
+
+        .section.active .section-content {
+            display: block;
+        }
+
+        .arrow {
+            transition: transform 0.3s ease;
+            font-size: 1.2em;
+        }
+
+        .section.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid #0277bd;
+            position: relative;
+        }
+
+        .concept-box::before {
+            content: "💡";
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5em;
+        }
+
+        .rule-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid #f57c00;
+            position: relative;
+        }
+
+        .rule-box::before {
+            content: "📋";
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5em;
+        }
+
+        .example-container {
+            display: grid;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .example-item {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .example-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .example-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .example-text {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2d3748;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .phonetic {
+            color: #667eea;
+            font-family: 'Courier New', monospace;
+            font-size: 1.3em;
+            margin: 15px 0;
+            padding: 10px;
+            background: #f8f9ff;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+        }
+
+        .linking-highlight {
+            background: linear-gradient(120deg, #ffeaa7 0%, #fab1a0 100%);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #2d3748;
+            position: relative;
+        }
+
+        .linking-highlight::after {
+            content: "🔗";
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            font-size: 0.8em;
+        }
+
+        .explanation {
+            background: #f0f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 3px solid #4299e1;
+        }
+
+        .pattern-type {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .japanese-comparison {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #4caf50;
+        }
+
+        .japanese-comparison h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .difficulty-level {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .stars {
+            color: #ffa726;
+            margin-left: 10px;
+        }
+
+        .practice-section {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 5px solid #8e24aa;
+        }
+
+        .practice-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .practice-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: #8e24aa;
+        }
+
+        .step-by-step {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed #667eea;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: 8px;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .common-mistakes {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #f44336;
+        }
+
+        .correct-incorrect {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .correct, .incorrect {
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .correct {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            border-left: 4px solid #4caf50;
+        }
+
+        .correct::before {
+            content: "✅";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2em;
+        }
+
+        .incorrect {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-left: 4px solid #f44336;
+        }
+
+        .incorrect::before {
+            content: "❌";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2em;
+        }
+
+        .tips-box {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 5px solid #ffa000;
+            position: relative;
+        }
+
+        .tips-box::before {
+            content: "💫";
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5em;
+        }
+
+        .quiz-container {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #1976d2;
+        }
+
+        .quiz-question {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #1565c0;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid #e3f2fd;
+            padding: 15px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .quiz-option:hover {
+            background: #f3e5f5;
+            border-color: #1976d2;
+            transform: translateY(-2px);
+        }
+
+        .quiz-option.selected {
+            background: #1976d2;
+            color: white;
+            border-color: #1976d2;
+        }
+
+        .quiz-option.correct {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+
+        .quiz-option.incorrect {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .next-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .section-header {
+                padding: 15px 20px;
+                font-size: 1.2em;
+            }
+            
+            .section-content {
+                padding: 20px;
+            }
+            
+            .correct-incorrect {
+                grid-template-columns: 1fr;
+            }
+            
+            .example-text {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 英語リンキング完全マスター教材</h1>
+            <p>ネイティブのような自然な英語を話すための音の繋がりを徹底的に学習しよう！<br>
+            「なぜ聞き取れないのか」「なぜ通じないのか」の謎がすべて解けます。</p>
+        </div>
+
+        <div class="section active" id="introduction">
+            <div class="section-header" onclick="toggleSection('introduction')">
+                🌟 リンキングって何？なぜ重要なの？
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="concept-box">
+                    <h3>🤔 こんな経験ありませんか？</h3>
+                    <p>教科書では "How are you?" を「ハウ アー ユー」と習ったのに、実際のネイティブは「ハワーユー」のように話します。これがリンキング（音の連結）の効果です。</p>
+                    <p>リンキングとは、単語と単語の境界で音がスムーズにつながる現象のことです。これを理解することで、英語のリスニングとスピーキングが劇的に改善されます。</p>
+                </div>
+
+                <div class="japanese-comparison">
+                    <h4>🇯🇵 日本語との違いを理解しよう</h4>
+                    <p><strong>日本語：</strong> 「お疲れ様でした」→「お・つ・か・れ・さ・ま・で・し・た」（各音節がはっきり分かれる）</p>
+                    <p><strong>英語：</strong> "Nice to meet you" → "Naistameetchu"（音がつながって流れるように発音される）</p>
+                    <p>この違いが、日本人が英語を聞き取りにくい、また通じにくい大きな原因の一つです。</p>
+                </div>
+
+                <div class="rule-box">
+                    <h3>🎯 リンキングをマスターすると得られる効果</h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="margin: 12px 0;">✅ <strong>リスニング力が飛躍的に向上</strong> - 映画やドラマが字幕なしで理解できるようになる</li>
+                        <li style="margin: 12px 0;">✅ <strong>自然で流暢な発音</strong> - ネイティブのようなリズムとスピードで話せる</li>
+                        <li style="margin: 12px 0;">✅ <strong>コミュニケーションの改善</strong> - 相手に聞き返されることが激減する</li>
+                        <li style="margin: 12px 0;">✅ <strong>英語への自信向上</strong> - 「英語らしい英語」が身につく</li>
+                        <li style="margin: 12px 0;">✅ <strong>TOEIC等のスコアアップ</strong> - リスニング問題での得点が安定する</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="basic-patterns">
+            <div class="section-header" onclick="toggleSection('basic-patterns')">
+                📚 リンキングの基本パターン4つ
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="concept-box">
+                    <h3>🔍 リンキングが起こる条件</h3>
+                    <p>リンキングは無作為に起こるわけではありません。明確なルールがあります。これらのパターンを理解することで、どんな組み合わせでもリンキングを予測できるようになります。</p>
+                </div>
+
+                <div class="step-by-step">
+                    <h3>📋 4つの基本パターン</h3>
+                    
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h4>子音 + 母音のリンキング</h4>
+                            <p>前の単語が子音で終わり、次の単語が母音で始まるとき、これらの音がスムーズにつながります。これが最も頻繁に起こるリンキングです。</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h4>同じ子音の連結</h4>
+                            <p>前の単語の最後の音と次の単語の最初の音が同じ子音のとき、一つの音として発音されます。</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h4>r音のリンキング</h4>
+                            <p>rで終わる単語の後に母音で始まる単語が来るとき、通常は発音されないrが復活してリンキングします。</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div>
+                            <h4>子音 + 子音のリンキング</h4>
+                            <p>特定の子音の組み合わせでは、音が変化したり、一方が脱落したりしながらリンキングします。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="pattern1">
+            <div class="section-header" onclick="toggleSection('pattern1')">
+                🔗 パターン1：子音 + 母音のリンキング
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="concept-box">
+                    <h3>🎯 最重要パターン！</h3>
+                    <p>これは英語で最も頻繁に起こるリンキングです。前の単語の最後の子音と、次の単語の最初の母音が自然につながって発音されます。日本語話者にとっては最も習得しやすいパターンでもあります。</p>
+                </div>
+
+                <div class="difficulty-level">
+                    <span><strong>習得難易度：</strong></span>
+                    <span class="stars">⭐⭐☆☆☆</span>
+                    <span>（初級レベル）</span>
+                </div>
+
+                <div class="example-container">
+                    <div class="example-item">
+                        <div class="pattern-type">基本例</div>
+                        <div class="example-text">Turn <span class="linking-highlight">it on</span></div>
+                        <div class="phonetic">/tɜːr<span class="linking-highlight">nɪt ɔːn</span>/</div>
+                        <div class="explanation">
+                            <strong>解説：</strong>「ターン イット オン」→「ターニットン」<br>
+                            turnの最後の/n/とitの最初の/ɪ/がつながり、まるで一つの単語「turniton」のように発音されます。
+                        </div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="pattern-type">応用例</div>
+                        <div class="example-text">Pick <span class="linking-highlight">it up</span></div>
+                        <div class="phonetic">/pɪ<span class="linking-highlight">kɪt ʌp</span>/</div>
+                        <div class="explanation">
+                            <strong>解説：</strong>「ピック イット アップ」→「ピキットップ」<br>
+                            pickの/k/とitの/ɪ/、さらにitの/t/とupの/ʌ/の両方でリンキングが発生しています。
+                        </div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="pattern-type">日常会話</div>
+                        <div class="example-text">Call <span class="linking-highlight">me up</span></div>
+                        <div class="phonetic">/kɔː<span class="linking-highlight">l miː ʌp</span>/</div>
+                        <div class="explanation">
+                            <strong>解説：</strong>「コール ミー アップ」→「コールミーヤップ」<br>
+                            callの/l/とmeの/m/、meの/iː/とupの/ʌ/でリンキングします。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="practice-section">
+                    <h3>🏃‍♂️ 練習してみよう</h3>
+                    <p>以下の文を読んで、リンキングが起こる部分を特定してみましょう。</p>
+                    
+                    <div class="practice-item">
+                        <p><strong>練習文：</strong> "Come and see us again."</p>
+                        <details style="margin-top: 10px;">
+                            <summary style="cursor: pointer; color: #667eea;">答えを見る</summary>
+                            <p style="margin-top: 10px;">Come <span class="linking-highlight">and</span>, see <span class="linking-highlight">us again</span><br>
+                            「カム アンド シー アス アゲイン」→「カマンド シーヤス アゲイン」</p>
+                        </details>
+                    </div>
+
+                    <div class="practice-item">
+                        <p><strong>練習文：</strong> "Take it easy."</p>
+                        <details style="margin-top: 10px;">
+                            <summary style="cursor: pointer; color: #667eea;">答えを見る</summary>
+                            <p style="margin-top: 10px;">Take <span class="linking-highlight">it easy</span><br>
+                            「テイク イット イージー」→「テイキットージー」</p>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="common-mistakes">
+                    <h4>⚠️ よくある間違い</h4>
+                    <div class="correct-incorrect">
+                        <div class="incorrect">
+                            <h5>❌ 間違い</h5>
+                            <p>各単語をはっきりと区切って発音<br>
+                            "Turn - it - on"</p>
+                        </div>
+                        <div class="correct">
+                            <h5>✅ 正しい</h5>
+                            <p>音をスムーズにつなげて発音<br>
+                            "Turniton"のように</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="pattern2">
+            <div class="section-header" onclick="toggleSection('pattern2')">
+                🔄 パターン2：同じ子音の連結
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="concept-box">
+                    <h3>🎯 音の効率化</h3>
+                    <p>同じ子音が連続するとき、私たちの発話器官は効率を求めて一つの音として発音します。これは言語の自然な進化の結果です。</p>
+                </div>
+
+                <div class="difficulty-level">
+                    <span><strong>習得難易度：</strong></span>
+                    <span class="stars">⭐⭐⭐☆☆</span>
+                    <span>（中級レベル）</span>
+                </div>
+
+                <div class="example-container">
+                    <div class="example-item">
+                        <div class="pattern-type">同じ音の連結</div>
+                        <div class="example-text">Good <span class="linking-highlight">d</span>ay</div>
+                        <div class="phonetic">/gʊ<span class="linking-highlight">d</span>eɪ/</div>
+                        <div class="explanation">
+                            <strong>解説：</strong>「グッド デイ」→「グッデイ」<br>
+                            goodの最後の/d/とdayの最初の/d/が一つの/d/として発音されます。二回/d/を発音するのではありません。
+                        </div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="pattern-type">子音クラスター</div>
+                        <div class="example-text">Big <span class="linking-highlight">g</span>ame</div>
+                        <div class="phonetic">/bɪ<span class="linking-highlight">g</span>eɪm/</div>
+                        <div class="explanation">
+                            <strong>解説：</strong>「ビッグ ゲーム」→「ビゲーム」<br>
+                            bigの/g/とgameの/g/が融合して、一つの長めの/g/音になります。
+                        </div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="pattern-type">複雑な例</div>
+                        <div class="example-text">Black <span class="linking-highlight">c</span>at</div>
+                        <div class="phonetic">/blæ<span class="linking-highlight">k</span>æt/</div>
+                        <div class="explanation">
+                            <strong>解説：</strong>「ブラック キャット」→「ブラキャット」<br>
+                            blackの/k/とcatの/k/が一つになり、まるで「blakat」のように聞こえます。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-by-step">
+                    <h3>🔧 発音のメカニズム</h3>
+                    
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <strong>準備段階：</strong>最初の単語の最後の音の口の形を作る
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <strong>保持段階：</strong>その口の形を維持しながら次の単語に移る
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <strong>発声段階：</strong>同じ音を二回発音せず、一回の強めの音として発音
+                        </div>
+                    </div>
+                </div>
+
+                <div class="practice-section">
+                    <h3>🎪 実践練習</h3>
+                    
+                    <div class="practice-item">
+                        <p><strong>基礎練習：</strong> 次の語句で同じ音の連結を意識してください。</p>
+                        <ul style="list-style: none; padding-left: 20px;">
+                            <li>• "This school" → /ðɪs-skuːl/ → /ðɪskuːl/</li>
+                            <li>• "Some money" → /sʌm-mʌni/ → /sʌmʌni/</li>
+                            <li>• "Hot tea" → /hɒt-tiː/ → /hɒtiː/</li>
+                        </ul>
+                    </div>
+
+                    <div class="practice-item">
+                        <p><strong>応用練習：</strong> 文中での連結を練習してみましょう。</p>
+                        <p>"I need to eat that takeout tonight."</p>
+                        <details style="margin-top: 10px;">
+                            <summary style="cursor: pointer; color: #667eea;">リンキング箇所を確認</summary>
+                            <p style="margin-top: 10px;">need <span class="linking-highlight">to</span>, eat <span class="linking-highlight">that</span>, takeout <span class="linking-highlight">tonight</span></p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="pattern3">
+            <div class="section-header" onclick="toggleSection('pattern3')">
+                🌊 パターン3：r音のリンキング（イギリス英語特有）
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="concept-box">
+                    <h3>🎯 消えるrが復活する魔法</h3>
+                    <p>イギリス英語では、単語の末尾のrは通常発音されません。しかし、次に母音が来ると、このrが「復活」してリンキングに参加します。これは「linking r」と呼ばれる現象です。</p>
+                </div>
+
+                <div class="difficulty-level">
+                    <span><strong>習得難易度：</strong></span>
+                    <span class="stars">⭐⭐⭐⭐☆</span>
+                    <span>（上級レベル）</span>
+                </div>
+
+                <div class="japanese-comparison">
+                    <h4>🇺🇸🇬🇧 アメリカ英語 vs イギリス英語</h4>
+                    <p><strong>アメリカ英語：</strong> "car" → /kɑːr/ (rをはっきり発音)</p>
+                    <p><strong>イギリス英語：</strong> "car" → /kɑː/ (rは発音しない)</p>
+                    <p><strong>でも...</strong> "car engine" → /kɑːr endʒɪn/ (rが復活！)</p>
+                </div>
+
+                <div class="example-container">
+                    <div class="example-item">
+                        <div class="pattern-type">基本例</div>
+                        <div class="example-text">For <span class="linking-highlight">a</span> while</div>
+                        <div class="phonetic">/fɔː<span class="linking-highlight">r ə</span> waɪl/</div>
+                        <div class="explanation">
+                            <strong>解説：</strong>「フォー ア ワイル」→「フォーラ ワイル」<br>
+                            forの末尾のrが復活し、aの音とリンキングします。
+                        </div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="pattern-type">日常表現</div>
+                        <div class="example-text">Here <span class="linking-highlight">and</span> there</div>
+                        <div class="phonetic">/hɪə<span class="linking-highlight">r ænd</span> ðeə/</div>
+                        <div class="explanation">
+                            <strong>解説：</strong>「ヒア アンド ゼア」→「ヒアランド ゼア」<br>
+                            hereのrが復活してandとリンキングします。
+                        </div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="pattern-type">複合例</div>
+                        <div class="example-text">Never <span class="linking-highlight">again</span></div>
+                        <div class="phonetic">/nevə<span class="linking-highlight">r əgen</span>/</div>
+                        <div class="explanation">
+                            <strong>解説：</strong>「ネヴァー アゲイン」→「ネヴァラゲイン」<br>
+                            neverの末尾のrが復活し、againとスムーズにつながります。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rule-box">
+                    <h3>📋 r音リンキングのルール</h3>
+                    <p>このパターンが発生する条件：</p>
+                    <ol style="padding-left: 20px;">
+                        <li><strong>前の単語がrまたはr音で終わる</strong>（スペリング上）</li>
+                        <li><strong>次の単語が母音で始まる</strong></li>
+                        <li><strong>イギリス英語またはオーストラリア英語</strong>（アメリカ英語では常にrを発音するため、この現象は起こりません）</li>
+                    </ol>
+                </div>
+
+                <div class="practice-section">
+                    <h3>🎭 イギリス英語チャレンジ</h3>
+                    
+                    <div class="practice-item">
+                        <p><strong>練習フレーズ：</strong> 以下をイギリス式発音で読んでみましょう。</p>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li style="margin: 10px 0;">• "far away" → /fɑːr əweɪ/</li>
+                            <li style="margin: 10px 0;">• "after all" → /ɑːftər ɔːl/</li>
+                            <li style="margin: 10px 0;">• "either or" → /aɪðər ɔː/</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tips-box">
+                    <h4>💡 学習のコツ</h4>
+                    <p>このパターンは主にイギリス英語で使われます。アメリカ英語を学習している場合は、参考程度に理解しておけば十分です。ただし、イギリス系の映画やドラマを見る際には、このパターンを知っていると理解がずっと楽になります。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="pattern4">
+            <div class="section-header" onclick="toggleSection('pattern4')">
+                ⚡ パターン4：子音 + 子音のリンキング
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="concept-box">
+                    <h3>🎯 最も複雑なパターン</h3>
+                    <p>子音同士がリンキングする場合、単純につながるだけでなく、音の変化や脱落が起こることがあります。これは英語話者の発話効率を高めるための自然な変化です。</p>
+                </div>
+
+                <div class="difficulty-level">
+                    <span><strong>習得難易度：</strong></span>
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>（上級レベル）</span>
+                </div>
+
+                <div class="step-by-step">
+                    <h3>🔧 子音リンキングの3つのタイプ</h3>
+                    
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h4>音の脱落（Elision）</h4>
+                            <p>発音が困難な組み合わせで、一方の音が消える現象です。</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h4>音の同化（Assimilation）</h4>
+                            <p>隣り合う音が影響し合って、新しい音に変化する現象です。</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h4>音の挿入（Epenthesis）</h4>
+                            <p>発音を楽にするために、新しい音が挿入される現象です。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-container">
+                    <div class="example-item">
+                        <div class="pattern-type">脱落の例</div>
+                        <div class="example-text">Las<span class="linking-highlight">(t)</span> night</div>
+                        <div class="phonetic">/læs<span class="linking-highlight">(t)</span> naɪt/ → /læsnaɪt/</div>
+                        <div class="explanation">
+                            <strong>解説：</strong>「ラスト ナイト」→「ラスナイト」<br>
+                            lastの/t/が脱落し、/s/と/n/が直接つながります。
+                        </div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="pattern-type">同化の例</div>
+                        <div class="example-text">What <span class="linking-highlight">you</span> doing?</div>
+                        <div class="phonetic">/wʌt <span class="linking-highlight">juː</span>/ → /wʌtʃuː/</div>
+                        <div class="explanation">
+                            <strong>解説：</strong>「ワット ユー」→「ワッチュー」<br>
+                            /t/と/j/が同化して/tʃ/（チ音）に変化します。
+                        </div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="pattern-type">挿入の例</div>
+                        <div class="example-text">Someth<span class="linking-highlight">ing</span></div>
+                        <div class="phonetic">/sʌmθɪŋ/ → /sʌmp<span class="linking-highlight">θ</span>ɪŋ/</div>
+                        <div class="explanation">
+                            <strong>解説：</strong>「サムシング」→「サムプシング」<br>
+                            /m/と/θ/の間に/p/音が挿入されることがあります。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="common-mistakes">
+                    <h4>⚠️ 上級者も悩むポイント</h4>
+                    <p>このパターンは、ネイティブスピーカーでも地域や話速によって異なることがあります。完璧を目指すよりも、「こういう変化もある」という感覚で理解することが大切です。</p>
+                    
+                    <div class="correct-incorrect">
+                        <div class="incorrect">
+                            <h5>❌ 避けるべき</h5>
+                            <p>すべての音を正確に発音しようとして、不自然にゆっくり話すこと</p>
+                        </div>
+                        <div class="correct">
+                            <h5>✅ 目指すべき</h5>
+                            <p>自然な速度で話し、音の変化を恐れないこと</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="comprehensive-practice">
+            <div class="section-header" onclick="toggleSection('comprehensive-practice')">
+                🎯 総合練習とテスト
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress"></div>
+                </div>
+                
+                <div class="quiz-container" id="quiz-container">
+                    <div class="quiz-question" id="quiz-question">次のフレーズで起こるリンキングパターンを特定してください。</div>
+                    <div id="current-phrase" style="font-size: 1.6em; margin: 20px 0; text-align: center; font-weight: bold;"></div>
+                    <div class="quiz-options" id="quiz-options"></div>
+                    <button class="next-btn" onclick="nextQuestion()" id="next-btn" style="display: none;">次の問題</button>
+                </div>
+
+                <div class="practice-section">
+                    <h3>🏆 実践的なフレーズで練習</h3>
+                    <p>日常会話でよく使われる表現を使って、複数のリンキングパターンを組み合わせて練習しましょう。</p>
+                    
+                    <div class="practice-item">
+                        <h4>💼 ビジネスシーン</h4>
+                        <p><strong>"Could you send me an email about it?"</strong></p>
+                        <details style="margin-top: 10px;">
+                            <summary style="cursor: pointer; color: #667eea;">リンキング分析を見る</summary>
+                            <div style="margin-top: 15px; padding: 15px; background: #f8f9ff; border-radius: 8px;">
+                                <p>Could <span class="linking-highlight">you</span> (同化: /kʊdʒuː/)</p>
+                                <p>send <span class="linking-highlight">me</span> <span class="linking-highlight">an</span> <span class="linking-highlight">email</span> (子音+母音のリンキング)</p>
+                                <p>about <span class="linking-highlight">it</span> (子音+母音のリンキング)</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="practice-item">
+                        <h4>👥 カジュアル会話</h4>
+                        <p><strong>"What are you up to this weekend?"</strong></p>
+                        <details style="margin-top: 10px;">
+                            <summary style="cursor: pointer; color: #667eea;">リンキング分析を見る</summary>
+                            <div style="margin-top: 15px; padding: 15px; background: #f8f9ff; border-radius: 8px;">
+                                <p>What <span class="linking-highlight">are</span> you (リンキング: /wʌtɑːr juː/)</p>
+                                <p>up <span class="linking-highlight">to</span> (子音+母音のリンキング)</p>
+                                <p>this <span class="linking-highlight">s</span>weekend (同じ音の連結)</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="practice-item">
+                        <h4>🛒 ショッピング</h4>
+                        <p><strong>"I need to pick up some milk and eggs."</strong></p>
+                        <details style="margin-top: 10px;">
+                            <summary style="cursor: pointer; color: #667eea;">リンキング分析を見る</summary>
+                            <div style="margin-top: 15px; padding: 15px; background: #f8f9ff; border-radius: 8px;">
+                                <p>need <span class="linking-highlight">to</span> (子音+母音のリンキング)</p>
+                                <p>pick <span class="linking-highlight">up</span> (子音+母音のリンキング)</p>
+                                <p>some <span class="linking-highlight">m</span>ilk (同じ音の連結)</p>
+                                <p>milk <span class="linking-highlight">and</span> <span class="linking-highlight">eggs</span> (子音+母音のリンキング)</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="advanced-tips">
+            <div class="section-header" onclick="toggleSection('advanced-tips')">
+                🚀 上達のための実践的アドバイス
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="tips-box">
+                    <h3>🎯 効果的な学習方法</h3>
+                    <div class="step-by-step">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div>
+                                <h4>シャドーイング</h4>
+                                <p>ネイティブの音声に合わせて同時に発音する練習です。音声の後を0.5秒遅れで追いかけるように話します。リンキングの自然な感覚が身につきます。</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div>
+                                <h4>録音比較</h4>
+                                <p>自分の発音を録音し、ネイティブの音声と比較します。リンキングができている部分とできていない部分が客観的に分かります。</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div>
+                                <h4>映画・ドラマ活用法</h4>
+                                <p>字幕を見ながら、リンキングが起こっている部分を意識して聞きます。同じシーンを繰り返し見て、徐々に字幕なしでも理解できるようにします。</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div>
+                                <h4>音読練習</h4>
+                                <p>英文を音読する際、意識的にリンキングを入れながら読みます。最初はゆっくりでも構いません。徐々にスピードを上げていきます。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rule-box">
+                    <h3>📚 推奨学習リソース</h3>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Podcast：</strong> "This American Life", "BBC Radio 4" - 自然な会話でリンキングを体験</li>
+                        <li><strong>YouTube：</strong> TED Talks - プレゼンテーション形式でクリアなリンキングを学習</li>
+                        <li><strong>映画：</strong> 日常会話が多い作品（ロマンティックコメディなど）</li>
+                        <li><strong>音楽：</strong> 歌詞がはっきり聞こえるアーティストの楽曲</li>
+                    </ul>
+                </div>
+
+                <div class="common-mistakes">
+                    <h4>⚠️ 学習者がよく陥る罠</h4>
+                    <div class="step-by-step">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div>
+                                <h4>完璧主義の罠</h4>
+                                <p>すべてのリンキングを完璧にしようとすると、かえって不自然になります。自然な会話では、リンキングしない場合もあることを理解しましょう。</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div>
+                                <h4>地域差を無視する罠</h4>
+                                <p>アメリカ、イギリス、オーストラリアなど、地域によってリンキングのパターンが異なることがあります。一つの「正解」に固執せず、柔軟に理解しましょう。</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div>
+                                <h4>スピード重視の罠</h4>
+                                <p>早く話すことがリンキングではありません。適切なスピードでクリアに話すことの方が重要です。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="japanese-comparison">
+                    <h4>🎊 最終目標：自然な英語話者への道</h4>
+                    <p>リンキングを習得することで、あなたの英語は「教科書英語」から「生きた英語」へと変化します。最初は意識的に練習が必要ですが、慣れてくると自然にリンキングができるようになります。</p>
+                    <p><strong>Remember:</strong> Perfect practice makes perfect. 正しい方法で継続的に練習することが、ネイティブレベルの英語への最短路です。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestionIndex = 0;
+        let score = 0;
+        
+        const quizData = [
+            {
+                phrase: "Turn it on",
+                options: ["子音+母音リンキング", "同じ音の連結", "r音リンキング", "子音+子音リンキング"],
+                correct: 0,
+                explanation: "turnの/n/とitの/ɪ/がつながる子音+母音リンキングです。"
+            },
+            {
+                phrase: "Good day",
+                options: ["子音+母音リンキング", "同じ音の連結", "r音リンキング", "子音+子音リンキング"],
+                correct: 1,
+                explanation: "goodの/d/とdayの/d/が一つの音になる同じ音の連結です。"
+            },
+            {
+                phrase: "For a while",
+                options: ["子音+母音リンキング", "同じ音の連結", "r音リンキング", "子音+子音リンキング"],
+                correct: 2,
+                explanation: "forの末尾のrが復活してaとつながるr音リンキングです。"
+            },
+            {
+                phrase: "Last night",
+                options: ["子音+母音リンキング", "同じ音の連結", "r音リンキング", "子音+子音リンキング"],
+                correct: 3,
+                explanation: "lastの/t/が脱落する子音+子音リンキングです。"
+            },
+            {
+                phrase: "Pick it up",
+                options: ["子音+母音リンキング", "同じ音の連結", "r音リンキング", "子音+子音リンキング"],
+                correct: 0,
+                explanation: "pickの/k/とitの/ɪ/がつながる子音+母音リンキングです。"
+            },
+            {
+                phrase: "Big game",
+                options: ["子音+母音リンキング", "同じ音の連結", "r音リンキング", "子音+子音リンキング"],
+                correct: 1,
+                explanation: "bigの/g/とgameの/g/が一つの音になる同じ音の連結です。"
+            },
+            {
+                phrase: "Here and there",
+                options: ["子音+母音リンキング", "同じ音の連結", "r音リンキング", "子音+子音リンキング"],
+                correct: 2,
+                explanation: "hereの末尾のrが復活してandとつながるr音リンキングです。"
+            },
+            {
+                phrase: "What you doing",
+                options: ["子音+母音リンキング", "同じ音の連結", "r音リンキング", "子音+子音リンキング"],
+                correct: 3,
+                explanation: "/t/と/j/が同化して/tʃ/になる子音+子音リンキングです。"
+            }
+        ];
+
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.classList.toggle('active');
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= quizData.length) {
+                showResults();
+                return;
+            }
+
+            const question = quizData[currentQuestionIndex];
+            document.getElementById('current-phrase').textContent = `"${question.phrase}"`;
+            
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'quiz-option';
+                optionElement.textContent = option;
+                optionElement.onclick = () => selectAnswer(index);
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            document.getElementById('next-btn').style.display = 'none';
+        }
+
+        function selectAnswer(selectedIndex) {
+            const question = quizData[currentQuestionIndex];
+            const options = document.querySelectorAll('.quiz-option');
+            
+            options.forEach((option, index) => {
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === selectedIndex && index !== question.correct) {
+                    option.classList.add('incorrect');
+                }
+                option.onclick = null;
+            });
+            
+            if (selectedIndex === question.correct) {
+                score++;
+            }
+            
+            // 解説表示
+            const explanation = document.createElement('div');
+            explanation.style.marginTop = '20px';
+            explanation.style.padding = '20px';
+            explanation.style.background = 'linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%)';
+            explanation.style.borderRadius = '10px';
+            explanation.style.borderLeft = '4px solid #4caf50';
+            explanation.innerHTML = `<strong>💡 解説:</strong> ${question.explanation}`;
+            document.getElementById('quiz-container').appendChild(explanation);
+            
+            document.getElementById('next-btn').style.display = 'inline-block';
+            
+            // プログレスバー更新
+            const progress = ((currentQuestionIndex + 1) / quizData.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            // 解説を削除
+            const explanation = document.querySelector('#quiz-container > div:last-child');
+            if (explanation && explanation.innerHTML.includes('解説:')) {
+                explanation.remove();
+            }
+            
+            loadQuestion();
+        }
+
+        function showResults() {
+            const percentage = Math.round((score / quizData.length) * 100);
+            let message = "";
+            let advice = "";
+            
+            if (percentage >= 90) {
+                message = "🎉 完璧！リンキングマスターです！";
+                advice = "素晴らしい理解力です。実際の会話でこの知識を活用して、さらに上達していきましょう。";
+            } else if (percentage >= 70) {
+                message = "👏 とても良い理解度です！";
+                advice = "基本パターンはしっかり理解できています。間違えた問題を復習して、完璧を目指しましょう。";
+            } else if (percentage >= 50) {
+                message = "📚 基礎は理解できています！";
+                advice = "各パターンの特徴をもう一度確認し、実際のフレーズで練習を重ねてみてください。";
+            } else {
+                message = "💪 これから伸びしろがたくさんあります！";
+                advice = "焦らず基本パターンから一つずつ確実に理解していきましょう。継続が力になります！";
+            }
+            
+            document.getElementById('quiz-container').innerHTML = `
+                <div style="text-align: center;">
+                    <h2>${message}</h2>
+                    <div style="font-size: 3em; margin: 30px 0; color: #667eea;">${score} / ${quizData.length}</div>
+                    <div style="font-size: 1.4em; margin: 20px 0;">正答率: ${percentage}%</div>
+                    <div style="margin: 25px 0; padding: 20px; background: linear-gradient(135deg, #f8f9ff 0%, #e3f2fd 100%); border-radius: 12px; color: #333; border-left: 4px solid #667eea;">
+                        <p style="font-size: 1.1em; line-height: 1.6;">${advice}</p>
+                    </div>
+                    <button class="next-btn" onclick="restartQuiz()" style="margin: 10px;">もう一度挑戦</button>
+                    <button class="next-btn" onclick="jumpToSection('introduction')" style="margin: 10px; background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);">教材の最初に戻る</button>
+                </div>
+            `;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            document.getElementById('progress').style.width = '0%';
+            loadQuestion();
+        }
+
+        function jumpToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+                if (!section.classList.contains('active')) {
+                    toggleSection(sectionId);
+                }
+            }
+        }
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 最初のセクション（導入）を開く
+            document.getElementById('introduction').classList.add('active');
+            
+            // クイズ開始
+            loadQuestion();
+        });
+    </script>
+</body>
+</html>
